@@ -3,6 +3,12 @@ const game = document.querySelector('#game');
 
 // Load the starting screen
 const initialLoad = () => {
+    // If content already exists, clear it out before continuing.
+    if (document.querySelector('#content')) {
+        const currentContent = document.querySelector('#content');
+        game.removeChild(currentContent);
+    }
+
     const indexDiv = document.createElement('div');
     indexDiv.id = 'content';
 
@@ -19,6 +25,7 @@ const initialLoad = () => {
     const howToPlayBtn = document.createElement('button');
     howToPlayBtn.classList.add('btn');
     howToPlayBtn.id = 'how-to-play-btn';
+    howToPlayBtn.addEventListener('click', renderHelp);
     const howToPlayBtnText = document.createTextNode('How To Play');
     howToPlayBtn.appendChild(howToPlayBtnText);
     indexDiv.appendChild(howToPlayBtn);
@@ -107,6 +114,7 @@ const incrementCorrect = () => {
     localStorage.setItem('correctAnswers', currentCount + 1);
 };
 
+// Add the length of the current word to the potential score
 const adjustPotentialScore = (points) => {
     const currentPotential = parseInt(localStorage.getItem('potentialScore'));
     localStorage.setItem('potentialScore', currentPotential + points);
@@ -118,7 +126,6 @@ const checkAnswer = () => {
     adjustPotentialScore(correctAnswer.length);
     const answerInputValue = document.querySelector('#answer-input').value;
     if (correctAnswer == answerInputValue) {
-        console.log('Correct Answer');
         // Increment the correct answer counter
         incrementCorrect();
         // If the answer is correct, give the user points (1 point for each letter).
@@ -129,7 +136,6 @@ const checkAnswer = () => {
         // Get new question
         loadNewQuestion();
     } else {
-        console.log('Incorrect Answer');
         // If the answer is incorrect, take away points (0.5 points for each letter, rounded down).
         const currentScore = parseInt(localStorage.getItem('currentScore'));
         const pointsLost = Math.floor(correctAnswer.length / 2);
@@ -142,14 +148,16 @@ const checkAnswer = () => {
     checkIfGameOver();
 };
 
+// Get a new word from words.js
 const loadNewQuestion = () => {
     document.querySelector('#answer-input').value = '';
     document.querySelector('#current-word').innerHTML = getWord();
 };
 
+// The game ends at question #20
 const checkIfGameOver = () => {
     const currentQCount = parseInt(localStorage.getItem('questionCount'));
-    if (currentQCount == 20) endGame();
+    if (currentQCount == 21) endGame();
 };
 
 const endGame = () => {
@@ -195,3 +203,5 @@ const endGame = () => {
 }
 
 window.addEventListener("load", initialLoad);
+// Go "home" if logo is clicked
+document.querySelector('#logo').addEventListener('click', initialLoad);

@@ -12,12 +12,14 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
 #game {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     background-color: white;
     width: 45vw;
     border-radius: 10px;
@@ -28,6 +30,10 @@ body {
 #logo {
     margin-top: 1em;
     width: 75%;
+}
+
+#logo:hover {
+    cursor: pointer;
 }
 
 footer {
@@ -44,11 +50,80 @@ footer {
     flex-direction: column;
     align-items: center;
     margin-top: 1em;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
 }
 
 .btn {
+    height: 5vh;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
     width: 30%;
     margin-top: 1em;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+#start-game-btn {
+    transition: background-color 0.25s;
+}
+
+#start-game-btn:hover {
+    background-color: #529340;
+}
+
+#question-count {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+#score {
+    width: 30%;
+    text-align: center;
+}
+
+#current-word {
+    font-size: 1.5em;
+}
+
+#answer-input {
+    width: 30%;
+    height: 3vh;
+}
+
+.help-paragraph {
+    width: 90%;
+    line-height: 1.5em;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    #app {
+        height: 100%;
+    }
+
+    #game {
+        border-radius: 0;
+        width: 100vw;
+    }
+
+    footer {
+        border-radius: 0;
+        width: 100vw;
+    }
+
+    #logo {
+        width: 100%;
+    }
+
+    .btn {
+        width: 90%;
+    }
+
+    #answer-input {
+        width: 90%;
+    }
 }
