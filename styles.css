@@ -61,6 +61,7 @@ footer {
     font-size: 1em;
     width: 30%;
     margin-top: 1em;
+    --webkit-appearance: none;
 }
 
 .btn:hover {
@@ -91,7 +92,7 @@ footer {
 
 #answer-input {
     width: 30%;
-    height: 3vh;
+    height: 30px;
 }
 
 .help-paragraph {
